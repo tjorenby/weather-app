@@ -27,7 +27,7 @@ function App() {
       .then((res) => {
         const photoRef =
           res?.data?.candidates?.[0]?.photos?.[0]?.photo_reference;
-        const imgLookupURL = `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photoRef}&key=AIzaSyDEiv2bkQNspJlw6_HVsvhEblSCxd_3YjY&maxwidth=700&maxheight=700`;
+        const imgLookupURL = `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photoRef}&key=${process.env.REACT_APP_GOOGLE_PLACES_API_KEY}&maxwidth=700&maxheight=700`;
 
         setLocationImg(imgLookupURL);
 
@@ -39,10 +39,11 @@ function App() {
       });
   };
 
+  // Pulls In current conditions from Weather API based on location.
   const getCurrentConditions = () => {
     Axios({
       method: "GET",
-      url: `http://api.weatherapi.com/v1/current.json?key=c4fcda5512754f439fb191328202911&q=${location}`,
+      url: `http://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_WEATHER_API_KEY}=${location}`,
     })
       .then((res) => {
         console.log("getCurrentConditions res is:", res);
