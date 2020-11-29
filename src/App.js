@@ -7,13 +7,13 @@ import "./App.css";
 function App() {
   const [locationImg, setLocationImg] = useState("");
   const [location, setLocation] = useState("Portland Oregon");
-  const [currentConditions, setCurrentConditions] = useState(null);
+  const [currentConditions, setCurrentConditions] = useState({});
+  const [threeDayForecast, setThreeDayForecast] = useState([]);
 
   useEffect(() => {
     getLocationImg();
-    getCurrentConditions();
-    console.log("currentConditions are:", currentConditions);
-  }, [setLocationImg]);
+    getWeather();
+  }, []);
 
   // Pulls in image of location (based on search criteria) from Google Places API
   const getLocationImg = () => {
@@ -32,32 +32,37 @@ function App() {
         setLocationImg(imgLookupURL);
 
         console.log("getLocationImg response is:", res);
-        console.log("photoRef is:", photoRef);
+        // console.log("photoRef is:", photoRef);
       })
       .catch((err) => {
         console.error("getLocationImg Error is:", err);
       });
   };
 
-  // Pulls In current conditions from Weather API based on location.
-  const getCurrentConditions = () => {
+  const getWeather = () => {
     Axios({
       method: "GET",
-      url: `http://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_WEATHER_API_KEY}=${location}`,
+      url: `http://api.weatherapi.com/v1/forecast.json?key=ae002df183ea43ae892202913202911&q=${location}&days=3`,
     })
       .then((res) => {
-        console.log("getCurrentConditions res is:", res);
-        setCurrentConditions(res.data.data);
+        console.log("getThreeDayForecast res is:", res.data);
+        setThreeDayForecast(res.data.forecast.forecastday);
+        setCurrentConditions(res.data.current);
       })
       .catch((err) => {
-        console.error(" getCurrentConditons error is:", err);
+        console.error(" getThreeDayForecast error is:", err);
       });
   };
 
+  //Test Logs
+  console.log("currentConditions are:", currentConditions);
+  console.log("threeDayForecast is:", threeDayForecast);
+
   return (
-    <div className="App">
+    <div className="container">
       <h1>Place</h1>
       <img src={locationImg} alt="place" />
+      {/* <p>Current Temp: {currentConditions.current.feelslike_f}</p> */}
     </div>
   );
 }
