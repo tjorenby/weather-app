@@ -64,20 +64,34 @@ function App() {
   //Sets className for the "app" div, based on current weather conditions. Changing className renders dynamic background images.
   const setAppClassName = () => {
     if (typeof weather.location != "undefined") {
-      if (weather.current.condition.text.includes("cloudy")) {
+      const condition = weather.current.condition.text;
+
+      if (condition.includes("Clear")) {
+        return "app clear";
+      }
+
+      if (condition.includes("Cloudy") || condition.includes("cloudy")) {
         return "app cloudy";
       }
 
-      if (weather.current.condition.text.includes("overcast")) {
+      if (condition.includes("overcast")) {
         return "app overcast";
       }
 
-      if (weather.current.condition.text.includes("rain")) {
+      if (condition.includes("rain") || condition.includes("showers")) {
         return "app rain";
       }
 
-      if (weather.current.condition.text.includes("snow" || "blizzard")) {
+      if (condition.includes("snow") || condition.includes("blizzard")) {
         return "app snow";
+      }
+
+      if (
+        condition.includes("fog") ||
+        condition.includes("Foggy") ||
+        condition.includes("Mist")
+      ) {
+        return "app fog";
       }
 
       return "app";
@@ -92,11 +106,11 @@ function App() {
   return (
     <div className={setAppClassName()}>
       <main className="">
-        <div className="container">
+        <div className="page-box">
           <div className="logo-box">
             <h1 className="logo">trueWeather</h1>
           </div>
-          <div className="search-box">
+          <div className="container search-box">
             <input
               type="text"
               className="search-bar"
@@ -109,52 +123,56 @@ function App() {
           </div>
 
           <div className="row">
-            <div className="current-container col-md-8">
+            <div className="col">
               {typeof weather.location != "undefined" ? (
-                <div className="overlay">
-                  <h1>{weather.location.name}</h1>
+                <div className="info-box">
+                  <h1 className="location">{weather.location.name}</h1>
 
                   <div className="weather-box">
-                    <div className="flex">
-                      <label>
-                        <p>Current Conditions</p>
+                    <label
+                      className={`tabs ${
+                        weatherDisplay === "current" ? "tab-border" : ""
+                      }`}
+                    >
+                      <h4>Current Conditions</h4>
+                      <input
+                        type="radio"
+                        name="weather-type"
+                        className="hide"
+                        value="current"
+                        onChange={(event) =>
+                          setWeatherDisplay(event.target.value)
+                        }
+                      />
+                    </label>
+                    <label
+                      className={`tabs ${
+                        weatherDisplay === "threeDay" ? "active tab-border" : ""
+                      }`}
+                    >
+                      <div>
+                        <h4>Three Day Forecast</h4>
                         <input
                           type="radio"
                           name="weather-type"
-                          className=""
-                          value="current"
-                          onChange={(event) =>
-                            setWeatherDisplay(event.target.value)
-                          }
-                        />
-                      </label>
-                      <label>
-                        <p>Three Day Forecast</p>
-                        <input
-                          type="radio"
-                          name="weather-type"
-                          className=""
+                          className="hide"
                           value="threeDay"
                           onChange={(event) =>
                             setWeatherDisplay(event.target.value)
                           }
                         />
-                      </label>
-                    </div>
-                  </div>
-
-                  {weatherDisplay === "current" ? (
-                    <CurrentConditions weather={weather} />
-                  ) : (
-                    <div className="">
-                      <p>{location}'s Three-Day Forecast</p>
-                      <div className="threeday-card">
-                        {threeDayForecast.map((item, i) => {
-                          return <ForecastEvent item={item} key={i} />;
-                        })}
                       </div>
-                    </div>
-                  )}
+                    </label>
+                  </div>
+                  <div className="threeday-card">
+                    {weatherDisplay === "current" ? (
+                      <CurrentConditions weather={weather} />
+                    ) : (
+                      threeDayForecast.map((item, i) => {
+                        return <ForecastEvent item={item} key={i} />;
+                      })
+                    )}
+                  </div>
                 </div>
               ) : (
                 ""

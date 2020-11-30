@@ -1,33 +1,43 @@
 .forecast-card {
+  width: 200px;
   border-radius: 10px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 20px 10px rgba(0, 0, 0, 0.2);
   padding: 20px;
   margin: 10px;
-  border: 1px solid red;
-  /* overflow: hidden; */
+  background-color: rgba(0, 0, 0, 0.02);
+  /* border: 1px solid red; */
 }
 
-/* .container {
+.page-box {
   max-width: 1100px;
   margin: 0 auto;
   overflow: auto;
   padding: 0 40px;
-  background-color: #c6c1d2;
-  color: #fff;
-} */
-
-.current-container {
-  /* width: 1000px;
-  height: 600px; */
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid salmon;
   text-align: center;
+}
+
+.info-box {
+  width: 100%;
+  /* text-align: center; */
+  border: 1px solid yellow;
+  padding: 15px;
+}
+
+.info-box .location {
+  color: #fff;
+  font-size: 32px;
+  font-weight: 500;
+  text-align: center;
+  text-shadow: 3px 3px rgba(50, 50, 70, 0.5);
 }
 
 .threeday-card {
   display: flex;
+  border: 1px solid green;
+  justify-content: center;
 }
 
 .hide {
@@ -51,6 +61,7 @@
   margin: 0 0 75px;
   display: flex;
   align-items: center;
+  border: 1px solid red;
 }
 
 .search-box .search-bar {
@@ -65,7 +76,6 @@
   outline: none;
 
   background-color: rgba(255, 255, 255, 0.5);
-  /* border-radius: 0px 0px 16px 16px; */
   border-radius: 8px;
 
   box-shadow: 0px 5px rgba(0, 0, 0, 0.2);
@@ -76,24 +86,23 @@
   transition: 0.4s ease;
 }
 
-.weather-box {
-  background-color: #fff;
-  color: #333;
-  /* border-radius: 10px; */
-  /* box-shadow: 0 0px 10px rgba(0, 0, 0, 0.2); */
-  width: 600px;
-  background: none;
-  margin-bottom: 5px;
-  text-align: center;
+.weather-box .tabs {
+  color: #fff;
+  cursor: pointer;
+  height: 50px;
 }
 
-.tabs {
-  /* background-color: #fff; */
-  color: #333;
-  border-radius: 5px;
-  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  width: 300px;
-  height: 85px;
-  padding: 10px;
+.tabs:hover {
+  transform: scale(0.98);
+  color: #d3d3d3;
+}
+
+.tab-border {
+  border-bottom: 5px solid #f15f4a;
+  transition: all 100ms;
+}
+
+.weather-box {
+  justify-content: space-evenly;
+  display: flex;
 }

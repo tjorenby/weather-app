@@ -41,6 +41,14 @@ code {
   background-image: url("./images/overcast.jpg");
 }
 
+.clear {
+  background-image: url("./images/clear.jpg");
+}
+
+.fog {
+  background-image: url("./images/fog.jpg");
+}
+
 main {
   min-height: 100vh;
   background-image: linear-gradient(
