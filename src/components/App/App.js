@@ -11,6 +11,7 @@ function App() {
   const [location, setLocation] = useState("Minneapolis MN");
   const [threeDayForecast, setThreeDayForecast] = useState([]);
   const [weather, setWeather] = useState({});
+  const [weatherDisplay, setWeatherDisplay] = useState("current");
 
   useEffect(() => {
     getLocationImg();
@@ -84,15 +85,16 @@ function App() {
   };
 
   //Test Logs
-  console.log("weather is:", weather);
-  console.log("threeDayForecast is:", threeDayForecast);
+  // console.log("weather is:", weather);
+  // console.log("threeDayForecast is:", threeDayForecast);
+  console.log("weatherDisplay is:", weatherDisplay);
 
   return (
     <div className={setAppClassName()}>
       <main className="">
         <div className="container">
-          <div>
-            <h1>trueWeather</h1>
+          <div className="logo-box">
+            <h1 className="logo">trueWeather</h1>
           </div>
           <div className="search-box">
             <input
@@ -105,29 +107,59 @@ function App() {
               Search!
             </button>
           </div>
-        </div>
 
-        <div className="row">
-          <div className="current-container col-md-8">
-            {typeof weather.location != "undefined" ? (
-              <div className="overlay">
-                <h1>{weather.location.name}</h1>
-                <CurrentConditions weather={weather} />
+          <div className="row">
+            <div className="current-container col-md-8">
+              {typeof weather.location != "undefined" ? (
+                <div className="overlay">
+                  <h1>{weather.location.name}</h1>
 
-                <div>
-                  <div className="hide">
-                    <p>{location}'s Three-Day Forecast</p>
-                    <div className="threeday-card">
-                      {threeDayForecast.map((item, i) => {
-                        return <ForecastEvent item={item} key={i} />;
-                      })}
+                  <div className="weather-box">
+                    <div className="flex">
+                      <label>
+                        <p>Current Conditions</p>
+                        <input
+                          type="radio"
+                          name="weather-type"
+                          className=""
+                          value="current"
+                          onChange={(event) =>
+                            setWeatherDisplay(event.target.value)
+                          }
+                        />
+                      </label>
+                      <label>
+                        <p>Three Day Forecast</p>
+                        <input
+                          type="radio"
+                          name="weather-type"
+                          className=""
+                          value="threeDay"
+                          onChange={(event) =>
+                            setWeatherDisplay(event.target.value)
+                          }
+                        />
+                      </label>
                     </div>
                   </div>
+
+                  {weatherDisplay === "current" ? (
+                    <CurrentConditions weather={weather} />
+                  ) : (
+                    <div className="">
+                      <p>{location}'s Three-Day Forecast</p>
+                      <div className="threeday-card">
+                        {threeDayForecast.map((item, i) => {
+                          return <ForecastEvent item={item} key={i} />;
+                        })}
+                      </div>
+                    </div>
+                  )}
                 </div>
-              </div>
-            ) : (
-              ""
-            )}
+              ) : (
+                ""
+              )}
+            </div>
           </div>
         </div>
       </main>
