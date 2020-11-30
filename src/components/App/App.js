@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
+
+//Component Imports
 import ForecastEvent from "../ForecastEvent/ForecastEvent";
+import CurrentConditions from "../CurrentConditions/CurrentConditions";
 
 //Style Import
 import "./App.css";
-import CurrentConditions from "../CurrentConditions/CurrentConditions";
+
+import { BsSearch } from "react-icons/bs";
 
 function App() {
   const [locationImg, setLocationImg] = useState("");
@@ -41,7 +45,7 @@ function App() {
       });
   };
 
-  const getWeather = () => {
+  const getWeather = (event) => {
     Axios({
       method: "GET",
       url: `http://api.weatherapi.com/v1/forecast.json?key=ae002df183ea43ae892202913202911&q=${location}&days=3`,
@@ -50,6 +54,7 @@ function App() {
         console.log("getWeather res is:", res.data);
         setWeather(res.data);
         setThreeDayForecast(res.data.forecast.forecastday);
+        setLocation("");
       })
       .catch((err) => {
         console.error(" getThreeDayForecast error is:", err);
@@ -78,11 +83,15 @@ function App() {
         return "app overcast";
       }
 
-      if (condition.includes("rain") || condition.includes("showers")) {
+      if (condition.includes("rain")) {
         return "app rain";
       }
 
-      if (condition.includes("snow") || condition.includes("blizzard")) {
+      if (
+        condition.includes("snow") ||
+        condition.includes("blizzard") ||
+        condition.includes("snow showers")
+      ) {
         return "app snow";
       }
 
@@ -107,26 +116,28 @@ function App() {
     <div className={setAppClassName()}>
       <main className="">
         <div className="page-box">
-          <div className="logo-box">
+          <div className="header-box">
             <h1 className="logo">trueWeather</h1>
-          </div>
-          <div className="container search-box">
-            <input
-              type="text"
-              className="search-bar"
-              placeholder="Enter A Location"
-              onChange={(event) => setLocation(event.target.value)}
-            />
-            <button className="btn" type="submit" onClick={getWeatherSearch}>
-              Search!
-            </button>
+            <div className="search-box">
+              <input
+                type="text"
+                className="search-bar"
+                placeholder="Enter A Location"
+                value={location}
+                onChange={(event) => setLocation(event.target.value)}
+              />
+
+              <BsSearch className="search-btn" onClick={getWeatherSearch} />
+            </div>
           </div>
 
           <div className="row">
             <div className="col">
               {typeof weather.location != "undefined" ? (
                 <div className="info-box">
-                  <h1 className="location">{weather.location.name}</h1>
+                  <h1 className="location mb-5">
+                    {weather.location.name} {weather.location.region}
+                  </h1>
 
                   <div className="weather-box">
                     <label
