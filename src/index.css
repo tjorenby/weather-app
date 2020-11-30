@@ -17,3 +17,37 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.app {
+  background-image: url("./images/sunny.jpg");
+  background-size: cover;
+  background-position: bottom;
+  transition: 0.4s ease;
+}
+
+.rain {
+  background-image: url("./images/rain.jpg");
+}
+
+.snow {
+  background-image: url("./images/snow.jpg");
+}
+
+.cloudy {
+  background-image: url("./images/cloudy.jpg");
+}
+
+.overcast {
+  background-image: url("./images/overcast.jpg");
+}
+
+main {
+  min-height: 100vh;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.75)
+  );
+  padding: 25px;
+  color: #fff;
+}
