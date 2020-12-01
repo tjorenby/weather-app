@@ -1,0 +1,125 @@
+.current-box {
+  position: relative;
+  display: inline-block;
+  padding: 15px 25px;
+  color: #fff;
+  font-size: 30px;
+  font-weight: 600;
+  text-shadow: 3px 6px rgba(50, 50, 70, 0.5);
+  text-align: center;
+}
+
+.forecast-card {
+  width: 200px;
+  border-radius: 10px;
+  box-shadow: 0 20px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  margin: 10px;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 800;
+  /* border: 1px solid red; */
+}
+
+.hide {
+  display: none;
+}
+
+.header-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 65px;
+}
+
+.info-box {
+  width: 100%;
+  padding: 15px;
+}
+
+.info-box .location {
+  color: #fff;
+  font-size: 40px;
+  font-weight: 700;
+  text-align: center;
+
+  text-shadow: 3px 3px rgba(50, 50, 70, 0.5);
+}
+
+.logo {
+  color: #fff;
+  font-size: 50px;
+  font-weight: 900;
+  text-align: center;
+  text-shadow: 3px 3px rgba(50, 50, 70, 0.5);
+}
+
+.page-box {
+  max-width: 1100px;
+  margin: 0 auto;
+  overflow: auto;
+  padding: 0 40px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.search-box {
+  width: 30%;
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.search-bar {
+  display: block;
+  width: 100%;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #232629;
+  background: none;
+  border: none;
+  background-clip: padding-box;
+}
+
+.search-btn {
+  background: none;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.tabs {
+  cursor: pointer;
+  height: 50px;
+  color: #fff;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.tabs:hover {
+  transform: scale(0.98);
+  color: #f15f4a;
+}
+
+.tab-border {
+  border-bottom: 5px solid #f15f4a;
+  transition: all 100ms;
+}
+
+.weather-box {
+  justify-content: space-evenly;
+  display: flex;
+}
+
+.weather-details-box {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin: 50px auto;
+}

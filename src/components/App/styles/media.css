@@ -1,0 +1,46 @@
+/* Tablets and under */
+@media (max-width: 800px) {
+  .info-box .location {
+    font-size: 30px;
+  }
+
+  .header-box {
+    flex-direction: column;
+  }
+
+  .search-box {
+    width: 70%;
+  }
+
+  .tabs {
+    font-size: 20px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 550px) {
+  .current-box {
+    font-size: 20px;
+  }
+
+  .info-box .location {
+    font-size: 20px;
+  }
+
+  .tabs {
+    font-size: 15px;
+  }
+
+  .search-box {
+    width: 80%;
+  }
+
+  .weather-details-box {
+    margin: 20px auto;
+  }
+
+  .weather-details-box,
+  .header-box {
+    flex-direction: column;
+  }
+}
