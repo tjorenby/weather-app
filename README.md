@@ -24,4 +24,4 @@ To run this application:
 
 ## Use The App
 
-A deployed version of this app can be found here:
+A deployed version of this app can be found here: https://theweather-app-jorenby.herokuapp.com/
