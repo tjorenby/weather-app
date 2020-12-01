@@ -11,39 +11,14 @@ import "./App.css";
 import { BsSearch } from "react-icons/bs";
 
 function App() {
-  const [locationImg, setLocationImg] = useState("");
   const [location, setLocation] = useState("Minneapolis MN");
   const [threeDayForecast, setThreeDayForecast] = useState([]);
   const [weather, setWeather] = useState({});
   const [weatherDisplay, setWeatherDisplay] = useState("current");
 
   useEffect(() => {
-    getLocationImg();
     getWeather();
   }, []);
-
-  // Pulls in image of location (based on search criteria) from Google Places API
-  const getLocationImg = () => {
-    const corsUrl = "https://morning-refuge-72177.herokuapp.com/"; // CORS proxy server (hosted through personal heroku acct.)
-    const placesRequestUrl = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${location}&key=AIzaSyDEiv2bkQNspJlw6_HVsvhEblSCxd_3YjY&inputtype=textquery&fields=name,photos`;
-
-    Axios({
-      method: "GET",
-      url: corsUrl + placesRequestUrl,
-    })
-      .then((res) => {
-        const photoRef =
-          res?.data?.candidates?.[0]?.photos?.[0]?.photo_reference;
-        const imgLookupURL = `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photoRef}&key=${process.env.REACT_APP_GOOGLE_PLACES_API_KEY}&maxwidth=700&maxheight=700`;
-
-        setLocationImg(imgLookupURL);
-
-        console.log("getLocationImg response is:", res);
-      })
-      .catch((err) => {
-        console.error("getLocationImg Error is:", err);
-      });
-  };
 
   const getWeather = (event) => {
     Axios({
@@ -54,16 +29,18 @@ function App() {
         console.log("getWeather res is:", res.data);
         setWeather(res.data);
         setThreeDayForecast(res.data.forecast.forecastday);
-        setLocation("");
       })
       .catch((err) => {
         console.error(" getThreeDayForecast error is:", err);
       });
   };
 
-  const getWeatherSearch = () => {
-    getWeather();
-    getLocationImg();
+  const getWeatherSearch = (event) => {
+    if (event.key === "Enter" || event.type === "mousedown") {
+      getWeather();
+      setWeatherDisplay("current"); // returns weatherDisplay to "current" (its default state)
+      setLocation(""); // resets Location value to empty string (clearing out the input field)
+    }
   };
 
   //Sets className for the "app" div, based on current weather conditions. Changing className renders dynamic background images.
@@ -79,7 +56,7 @@ function App() {
         return "app cloudy";
       }
 
-      if (condition.includes("overcast")) {
+      if (condition.includes("overcast") || condition.includes("Overcast")) {
         return "app overcast";
       }
 
@@ -125,9 +102,10 @@ function App() {
                 placeholder="Enter A Location"
                 value={location}
                 onChange={(event) => setLocation(event.target.value)}
+                onKeyPress={getWeatherSearch}
               />
 
-              <BsSearch className="search-btn" onClick={getWeatherSearch} />
+              <BsSearch className="search-btn" onMouseDown={getWeatherSearch} />
             </div>
           </div>
 
@@ -136,44 +114,56 @@ function App() {
               {typeof weather.location != "undefined" ? (
                 <div className="info-box">
                   <h1 className="location mb-5">
-                    {weather.location.name} {weather.location.region}
+                    {weather.location.name}, {weather.location.region}
                   </h1>
 
-                  <div className="weather-box">
-                    <label
-                      className={`tabs ${
-                        weatherDisplay === "current" ? "tab-border" : ""
-                      }`}
+                  <div className="">
+                    <fieldset
+                      value={weatherDisplay}
+                      // onChange={(event) =>
+                      //   setWeatherDisplay(event.target.value)
+                      // }
+                      className="weather-box"
                     >
-                      <h4>Current Conditions</h4>
-                      <input
-                        type="radio"
-                        name="weather-type"
-                        className="hide"
-                        value="current"
-                        onChange={(event) =>
-                          setWeatherDisplay(event.target.value)
-                        }
-                      />
-                    </label>
-                    <label
-                      className={`tabs ${
-                        weatherDisplay === "threeDay" ? "active tab-border" : ""
-                      }`}
-                    >
-                      <div>
-                        <h4>Three Day Forecast</h4>
+                      <label
+                        className={`tabs ${
+                          weatherDisplay === "current" ? "tab-border" : ""
+                        }`}
+                      >
+                        <p>Current Conditions</p>
                         <input
                           type="radio"
                           name="weather-type"
                           className="hide"
-                          value="threeDay"
+                          value="current"
+                          checked={weatherDisplay === "current"}
                           onChange={(event) =>
                             setWeatherDisplay(event.target.value)
                           }
                         />
-                      </div>
-                    </label>
+                      </label>
+                      <label
+                        className={`tabs ${
+                          weatherDisplay === "threeDay"
+                            ? "active tab-border"
+                            : ""
+                        }`}
+                      >
+                        <div>
+                          <p>Three Day Forecast</p>
+                          <input
+                            type="radio"
+                            name="weather-type"
+                            className="hide"
+                            value="threeDay"
+                            checked={weatherDisplay === "threeDay"}
+                            onChange={(event) =>
+                              setWeatherDisplay(event.target.value)
+                            }
+                          />
+                        </div>
+                      </label>
+                    </fieldset>
                   </div>
                   <div className="threeday-card">
                     {weatherDisplay === "current" ? (

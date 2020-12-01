@@ -1,9 +1,12 @@
 import React from "react";
 
+//Style Imports
+import moment from "moment";
+
 function CurrentConditions(props) {
   return (
-    <div className="forecast-card">
-      <p>{props.weather.location.localtime}</p>
+    <div className="current-box">
+      <p>{moment(props.weather.location.localtime).format("LT")}</p>
       <img src={props.weather.current.condition.icon} alt="condition icon" />
       <p>{props.weather.current.condition.text}</p>
 
