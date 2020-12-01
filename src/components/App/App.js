@@ -78,7 +78,8 @@ function App() {
       if (
         condition.includes("fog") ||
         condition.includes("Foggy") ||
-        condition.includes("Mist")
+        condition.includes("Mist") ||
+        condition.includes("Fog")
       ) {
         return "app fog";
       }
