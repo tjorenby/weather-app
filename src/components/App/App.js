@@ -94,7 +94,7 @@ function App() {
 
   return (
     <div className={setAppClassName()}>
-      <main className="">
+      <main>
         <div className="page-box">
           <div className="header-box">
             <div style={{ display: "flex" }}>
