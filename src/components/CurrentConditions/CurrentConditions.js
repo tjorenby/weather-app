@@ -1,18 +1,14 @@
 import React from "react";
 
 //Style Imports
-import moment from "moment";
+import { format } from "date-fns";
 
 function CurrentConditions(props) {
-  const localTime = moment(props.weather.location.localtime).format(
-    "YYYY-M-D H:mm"
-  );
+  const localTime = format(new Date(props.weather.location.localtime), "p");
+
   return (
     <div className="current-box">
-      <p style={{ fontSize: "20px" }}>
-        {moment(localTime).format("LT")}
-        {/* {props.weather.location.localtime} */}
-      </p>
+      <p style={{ fontSize: "20px" }}>{localTime}</p>
       <img src={props.weather.current.condition.icon} alt="condition icon" />
       <p>{props.weather.current.condition.text}</p>
 
