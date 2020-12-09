@@ -25,7 +25,7 @@ function App() {
   const getWeather = () => {
     Axios({
       method: "GET",
-      url: `https://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_WEATHER_API_KEY}=${location}&days=3`,
+      url: `https://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=${location}&days=3`,
     })
       .then((res) => {
         // console.log("getWeather res is:", res.data);
