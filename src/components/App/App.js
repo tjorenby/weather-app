@@ -16,7 +16,7 @@ function App() {
   const [threeDayForecast, setThreeDayForecast] = useState([]);
   const [weatherDisplay, setWeatherDisplay] = useState("current");
 
-  //Runs getWeather on app load
+  //Runs getWeather on app load.
   useEffect(() => {
     getWeather();
   }, []);
