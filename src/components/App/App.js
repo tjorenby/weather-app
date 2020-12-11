@@ -91,7 +91,7 @@ function App() {
   //Test Logs
   // console.log("weather is:", weather);
   // console.log("threeDayForecast is:", threeDayForecast);
-  //console.log("weatherDisplay is:", weatherDisplay);
+  console.log("weatherDisplay is:", weatherDisplay);
 
   return (
     <div className={setAppClassName()}>

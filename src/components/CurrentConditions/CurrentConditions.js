@@ -4,7 +4,12 @@ import React from "react";
 import { format } from "date-fns";
 
 function CurrentConditions(props) {
-  const localTime = format(new Date(props.weather.location.localtime), "p");
+  const localTime = format(
+    new Date(props.weather.location.localtime_epoch),
+    "p"
+  );
+
+  console.log("localTime is:", localTime);
 
   return (
     <div className="current-box">

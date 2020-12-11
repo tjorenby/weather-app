@@ -4,10 +4,13 @@ import React from "react";
 import { format } from "date-fns";
 
 function ForecastEvent(props) {
-  const forecastDate = format(new Date(props.item.date), "PPPP");
+  const forecastDate = format(new Date(props.item.date), "PP");
+  const forecastDay = format(new Date(props.item.date), "E");
   return (
     <div className="forecast-card">
-      <p>{forecastDate}</p>
+      <p>
+        {forecastDay} {forecastDate}
+      </p>
       <img src={props.item.day.condition.icon} alt="icon" />
       <p>{props.item.day.condition.text}</p>
       <p>High: {Math.round(props.item.day.maxtemp_f)}° f</p>
