@@ -17,36 +17,36 @@ function App() {
   const setAppClassName = () => {
     if (typeof weather.location != "undefined") {
       const condition = weather.current.condition.text;
+      const lowerCaseConditions = condition.toLowerCase();
 
-      if (condition.includes("Clear")) {
+      if (lowerCaseConditions.includes("clear")) {
         return "app clear";
       }
 
-      if (condition.includes("Cloudy") || condition.includes("cloudy")) {
+      if (lowerCaseConditions.includes("cloudy")) {
         return "app cloudy";
       }
 
-      if (condition.includes("overcast") || condition.includes("Overcast")) {
+      if (lowerCaseConditions.includes("overcast")) {
         return "app overcast";
       }
 
-      if (condition.includes("rain")) {
+      if (lowerCaseConditions.includes("rain")) {
         return "app rain";
       }
 
       if (
-        condition.includes("snow") ||
-        condition.includes("blizzard") ||
-        condition.includes("snow showers")
+        lowerCaseConditions.includes("snow") ||
+        lowerCaseConditions.includes("blizzard") ||
+        lowerCaseConditions.includes("snow showers")
       ) {
         return "app snow";
       }
 
       if (
-        condition.includes("fog") ||
-        condition.includes("Foggy") ||
-        condition.includes("Mist") ||
-        condition.includes("Fog")
+        lowerCaseConditions.includes("fog") ||
+        lowerCaseConditions.includes("foggy") ||
+        lowerCaseConditions.includes("mist")
       ) {
         return "app fog";
       }
