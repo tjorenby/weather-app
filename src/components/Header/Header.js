@@ -11,7 +11,6 @@ function Header(props) {
   const setWeather = props.setWeather;
   const setThreeDayForecast = props.setThreeDayForecast;
   const setWeatherDisplay = props.setWeatherDisplay;
-
   const [location, bindLocation, resetLocation] = useInput("Minneapolis MN");
 
   //Runs getWeather on app load.

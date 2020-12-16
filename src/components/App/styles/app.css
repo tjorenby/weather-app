@@ -3,7 +3,7 @@
   display: inline-block;
   padding: 15px 25px;
   color: #fff;
-  font-size: 30px;
+  font-size: 40px;
   font-weight: 600;
   text-shadow: 3px 6px rgba(50, 50, 70, 0.5);
   text-align: center;
@@ -19,7 +19,6 @@
   color: #fff;
   font-size: 15px;
   font-weight: 800;
-  /* border: 1px solid red; */
 }
 
 .hide {
@@ -43,7 +42,6 @@
   font-size: 40px;
   font-weight: 700;
   text-align: center;
-
   text-shadow: 3px 3px rgba(50, 50, 70, 0.5);
 }
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 //Component Imports
 import Header from "../Header/Header";
@@ -64,6 +64,7 @@ function App() {
             setThreeDayForecast={setThreeDayForecast}
             setWeatherDisplay={setWeatherDisplay}
           />
+
           <WeatherType
             weather={weather}
             threeDayForecast={threeDayForecast}
