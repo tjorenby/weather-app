@@ -28,7 +28,7 @@ function Header(props) {
         // console.log("getWeather res is:", res.data);
         setWeather(res.data);
         setThreeDayForecast(res.data.forecast.forecastday);
-        resetLocation(""); // resets Location value to empty string (clearing out the input field)
+        resetLocation(); // resets Location value to empty string (clearing out the input field)
       })
       .catch((err) => {
         console.error(" getWeather error is:", err);

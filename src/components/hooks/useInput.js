@@ -4,7 +4,7 @@ function useInput(initialValue) {
   const [value, setValue] = useState(initialValue);
 
   const reset = () => {
-    setValue(initialValue);
+    setValue("");
   };
 
   const bind = {
