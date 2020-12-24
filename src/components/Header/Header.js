@@ -12,6 +12,7 @@ function Header(props) {
   const setThreeDayForecast = props.setThreeDayForecast;
   const setWeatherDisplay = props.setWeatherDisplay;
   const [location, bindLocation, resetLocation] = useInput("Minneapolis MN");
+  const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 
   //Runs getWeather on app load.
   useEffect(() => {
@@ -22,7 +23,7 @@ function Header(props) {
   const getWeather = () => {
     Axios({
       method: "GET",
-      url: `https://api.weatherapi.com/v1/forecast.json?key=d32d4fb29fb548779dd215808200812&q=${location}&days=3`,
+      url: `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${location}&days=3`,
     })
       .then((res) => {
         // console.log("getWeather res is:", res.data);
